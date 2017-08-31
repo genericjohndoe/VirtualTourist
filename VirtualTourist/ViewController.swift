@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var map: MKMapView!
     
@@ -24,16 +24,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDe
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        addPin()
-        return true
-    }
-    
     @IBAction func addPin(){
         print("addPin called")
         let touchPoint = gestureRecognizer.location(in: map)

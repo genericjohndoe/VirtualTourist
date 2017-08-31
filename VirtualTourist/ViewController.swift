@@ -13,7 +13,6 @@ class ViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var map: MKMapView!
     
-    var gestureBegin: Bool = false
     var gestureRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
     
     override func viewDidLoad() {
@@ -31,6 +30,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = newCoordinates
         map.addAnnotation(annotation)
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+        performSegue(withIdentifier: "LocationToPhotos", sender: view.annotation?.coordinate)
+        mapView.deselectAnnotation(view.annotation, animated: false)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "LocationToPhotos" {
+            let destination = segue.destination as! PhotosViewController
+            destination.coordinates = sender as! CLLocationCoordinate2D
+        }
     }
 
 }

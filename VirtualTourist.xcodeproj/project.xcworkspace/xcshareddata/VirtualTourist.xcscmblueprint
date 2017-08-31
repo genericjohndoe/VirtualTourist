@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "70FA348ED8F84050BAE72334EA71D7C238248E1F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F73AB9D98DCAF0977871305A7CC4DAD446A4E1E1" : 9223372036854775807,
+    "70FA348ED8F84050BAE72334EA71D7C238248E1F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0A8A7262-E330-43DB-BE5A-0E443B115270",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F73AB9D98DCAF0977871305A7CC4DAD446A4E1E1" : "",
+    "70FA348ED8F84050BAE72334EA71D7C238248E1F" : "VirtualTourist\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VirtualTourist",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VirtualTourist.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/genericjohndoe\/VirtualTourist.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "70FA348ED8F84050BAE72334EA71D7C238248E1F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/genericjohndoe\/MemeMe-2.0",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F73AB9D98DCAF0977871305A7CC4DAD446A4E1E1"
+    }
+  ]
+}

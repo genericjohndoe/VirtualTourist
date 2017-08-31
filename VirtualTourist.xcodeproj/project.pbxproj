@@ -18,6 +18,7 @@
 		9FA204991F57171A000B5C78 /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA204951F57171A000B5C78 /* Pin+CoreDataClass.swift */; };
 		9FA2049A1F57171A000B5C78 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA204961F57171A000B5C78 /* Pin+CoreDataProperties.swift */; };
 		9FA2049C1F571CE6000B5C78 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2049B1F571CE6000B5C78 /* CoreDataStack.swift */; };
+		9FA2049E1F5850A5000B5C78 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2049D1F5850A5000B5C78 /* PhotosViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		9FA204951F57171A000B5C78 /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9FA204961F57171A000B5C78 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9FA2049B1F571CE6000B5C78 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9FA2049D1F5850A5000B5C78 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				9FA204741F5679A4000B5C78 /* ViewController.swift */,
+				9FA2049D1F5850A5000B5C78 /* PhotosViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -186,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FA2049E1F5850A5000B5C78 /* PhotosViewController.swift in Sources */,
 				9FA204751F5679A4000B5C78 /* ViewController.swift in Sources */,
 				9FA204731F5679A4000B5C78 /* AppDelegate.swift in Sources */,
 				9FA204971F57171A000B5C78 /* Photo+CoreDataClass.swift in Sources */,

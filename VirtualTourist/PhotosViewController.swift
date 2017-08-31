@@ -21,6 +21,8 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinates
         map.addAnnotation(annotation)
+        let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 5,longitudeDelta: 5))
+        map.setRegion(region, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return 0}

@@ -29,7 +29,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         pins = loadPins()
-        print("pins count \(pins?.count)")
+
         if pins != nil {
             for pin in pins!{
                 let annotation = MKPointAnnotation()
@@ -40,6 +40,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
     }
 
     @IBAction func addPin(){
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
         print("addPin called")
         let touchPoint = gestureRecognizer.location(in: map)
         let newCoordinates = map.convert(touchPoint, toCoordinateFrom: map)
@@ -47,7 +48,8 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         annotation.coordinate = newCoordinates
         map.addAnnotation(annotation)
         Pin(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude, context: delegate.stack.context)
-        save()
+        delegate.stack.save()
+        }
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
@@ -71,17 +73,6 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         }catch {
             fatalError("errpr with fetch")
         }
-    }
-    
-    func save(){
-        print("save called")
-        do {
-            //print("Total number of points saved \(try delegate.stack.context.fetch(Pin.fetchRequest()).count)")
-            try delegate.stack.context.save()
-        } catch {
-            fatalError("Failure to save context: \(error)")
-        }
-
     }
 }
 

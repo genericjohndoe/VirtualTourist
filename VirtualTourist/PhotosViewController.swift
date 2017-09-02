@@ -28,6 +28,11 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return 0}
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        //download BLOB data, use urlsession with comletion handler
         return UICollectionViewCell()
     }
+    
+    //call flickr func to download images, save them
+    //check to see if images exist
+    //flickr only give image meta data, not BLOB
 }

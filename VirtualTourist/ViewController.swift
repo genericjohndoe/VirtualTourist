@@ -16,6 +16,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
     @IBOutlet weak var map: MKMapView!
     
     var pins: [Pin]? = [Pin]()
+    var selectedPin: Pin?
     var gestureRecognizer: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -53,14 +54,24 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+        //print("pin selected")
+        for pin in pins!{
+            if pin.longitude == view.annotation?.coordinate.longitude && pin.latitude == view.annotation?.coordinate.latitude {
+                selectedPin = pin
+                print("pin set")
+            }
+        }
         performSegue(withIdentifier: "LocationToPhotos", sender: view.annotation?.coordinate)
+        print("performSegue called")
         mapView.deselectAnnotation(view.annotation, animated: false)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "LocationToPhotos" {
+            print("prepare called")
             let destination = segue.destination as! PhotosViewController
             destination.coordinates = sender as! CLLocationCoordinate2D
+            destination.pin = selectedPin!
         }
     }
     

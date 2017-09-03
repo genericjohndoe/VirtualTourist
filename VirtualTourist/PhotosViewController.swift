@@ -13,8 +13,11 @@ import MapKit
 class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var coordinates:CLLocationCoordinate2D!
+    var pin: Pin!
+    var photos: [Photo]?
 
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,11 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         map.addAnnotation(annotation)
         let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 5,longitudeDelta: 5))
         map.setRegion(region, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return 0}

@@ -60,8 +60,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         print("cellforrowat called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
-        let uiiamge = UIImage(data: photo.image! as Data)
-        cell.photo = UIImageView(image: uiiamge)
+        cell.photo.image = UIImage(data: photo.image! as Data)
         return cell
     }
 }

@@ -32,7 +32,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if pin.photo?.count == 0 {
-            print("pin photo set is nil")
             FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
                 (sucess, error) in
                 if sucess {
@@ -45,9 +44,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                 }
             }
         }
-        print("pin photo set isn't nil")
-        print(pin.photo!)
-        print(pin.photo!.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return (pin.photo?.count)!}

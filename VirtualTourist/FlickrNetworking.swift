@@ -50,22 +50,21 @@ class FlickrNetworking{
             let newData = data.subdata(in: range)
             var parsedResult: [String: Any]!
             do {
-                print("data description \(data.description)")
+                //print("data description \(data.description)")
                 parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String: Any]
-                print("parsed result \(parsedResult)")
+                //print("parsed result \(parsedResult)")
                 let photoJson = parsedResult["photos"] as? [String:Any]
                 let photoData = photoJson?["photo"] as? [[String:Any]]
-                print(photoData!)
-//                print("photo count \(photoData!.count)")
-//                var index = 1
-//                for photo in photoData! {
-//                    let urlstring = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg"
-//                    let url = URL(string: urlstring)
-//                    let newPhoto =  Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
-//                    newPhoto.pin = pin
-//                    pin.addToPhoto(newPhoto)
-//                    index = index + 1
-//                }
+                //print(photoData!)
+                var index = 1
+                for photo in photoData! {
+                    let urlstring = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg"
+                    let url = URL(string: urlstring)
+                    let newPhoto =  Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
+                    newPhoto.pin = pin
+                    pin.addToPhoto(newPhoto)
+                    index = index + 1
+                }
                 completion(true,"no error")
                 return
             } catch {

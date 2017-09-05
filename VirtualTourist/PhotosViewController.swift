@@ -21,6 +21,8 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinates
@@ -28,6 +30,8 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         let region = MKCoordinateRegion(center: coordinates, span: MKCoordinateSpan(latitudeDelta: 5,longitudeDelta: 5))
         map.setRegion(region, animated: true)
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,12 +47,17 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                     }
                 }
             }
+        } else {
+            collectionView.reloadData()
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return (pin.photo?.count)!}
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print((pin.photo?.count)!)
+        return (pin.photo?.count)!}
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("cellforrowat called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         let uiiamge = UIImage(data: photo.image! as Data)

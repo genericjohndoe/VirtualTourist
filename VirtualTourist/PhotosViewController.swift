@@ -39,8 +39,8 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
             FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
                 (sucess, error) in
                 if sucess {
-                    print("networking request successful")
-                    print(self.pin.photo?.count)
+                    //print("networking request successful")
+                    //print(self.pin.photo?.count)
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
                         self.delegate.stack.save()
@@ -62,5 +62,13 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         cell.photo.image = UIImage(data: photo.image! as Data)
         return cell
+    }
+    
+    @IBAction func loadPhotos(_ sender: Any) {
+        //empty nsset linked to pin
+        //delete photos from database
+        //http request to load new photos
+        //create new photo objects
+        //link to pin
     }
 }

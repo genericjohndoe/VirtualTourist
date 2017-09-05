@@ -103,7 +103,13 @@
                             <constraint firstItem="OKv-Pn-Pov" firstAttribute="top" secondItem="I5s-dg-iQI" secondAttribute="bottom" constant="8" id="tbI-de-nHg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Pictures From Location" id="oSr-sb-hQ8"/>
+                    <navigationItem key="navigationItem" title="Pictures From Location" id="oSr-sb-hQ8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Up4-od-MuG">
+                            <connections>
+                                <action selector="loadPhotos:" destination="XFs-YR-Iea" id="kaJ-7I-I69"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="OKv-Pn-Pov" id="bLr-8N-8G6"/>
                         <outlet property="map" destination="I5s-dg-iQI" id="uEH-1B-byy"/>

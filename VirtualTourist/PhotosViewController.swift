@@ -31,22 +31,10 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         map.setRegion(region, animated: true)
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if pin.photo?.count == 0 {
-            FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
-                (sucess, error) in
-                if sucess {
-                    //print("networking request successful")
-                    //print(self.pin.photo?.count)
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.delegate.stack.save()
-                    }
-                }
-            }
+            getPhotos()
         } else {
             collectionView.reloadData()
         }
@@ -57,7 +45,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         return (pin.photo?.count)!}
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("cellforrowat called")
+        //print("cellforrowat called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         cell.photo.image = UIImage(data: photo.image! as Data)
@@ -65,10 +53,24 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     }
     
     @IBAction func loadPhotos(_ sender: Any) {
-        //empty nsset linked to pin
-        //delete photos from database
-        //http request to load new photos
-        //create new photo objects
-        //link to pin
+        for photo in pin.photo! {
+            delegate.stack.context.delete(photo as! Photo)
+        }
+        pin.photo = NSSet()
+        getPhotos()
+    }
+    
+    func getPhotos(){
+        FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
+            (sucess, error) in
+            if sucess {
+                print("networking request successful")
+                //print(self.pin.photo?.count)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.delegate.stack.save()
+                }
+            }
+        }
     }
 }

@@ -14,13 +14,14 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     
     var coordinates:CLLocationCoordinate2D!
     var pin: Pin!
-    var photos: [Photo]?
+    let delegate = UIApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinates
         map.addAnnotation(annotation)
@@ -30,17 +31,32 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if pin.photo?.count == 0 {
+            print("pin photo set is nil")
+            FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
+                (sucess, error) in
+                if sucess {
+                    print("networking request successful")
+                    print(self.pin.photo?.count)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        self.delegate.stack.save()
+                    }
+                }
+            }
+        }
+        print("pin photo set isn't nil")
+        print(pin.photo!)
+        print(pin.photo!.count)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return 0}
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {return (pin.photo?.count)!}
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //download BLOB data, use urlsession with comletion handler
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
+        let photo = pin.photo?.allObjects[indexPath.row] as! Photo
+        let uiiamge = UIImage(data: photo.image! as Data)
+        cell.photo = UIImageView(image: uiiamge)
+        return cell
     }
-    
-    //call flickr func to download images, save them
-    //check to see if images exist
-    //flickr only give image meta data, not BLOB
 }

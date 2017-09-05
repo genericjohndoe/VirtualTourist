@@ -20,6 +20,7 @@
 		9FA2049C1F571CE6000B5C78 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2049B1F571CE6000B5C78 /* CoreDataStack.swift */; };
 		9FA2049E1F5850A5000B5C78 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2049D1F5850A5000B5C78 /* PhotosViewController.swift */; };
 		9FA204A01F5B7D0A000B5C78 /* FlickrNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA2049F1F5B7D0A000B5C78 /* FlickrNetworking.swift */; };
+		9FA204A21F5DB27C000B5C78 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA204A11F5DB27C000B5C78 /* PhotoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9FA2049B1F571CE6000B5C78 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9FA2049D1F5850A5000B5C78 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		9FA2049F1F5B7D0A000B5C78 /* FlickrNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrNetworking.swift; sourceTree = "<group>"; };
+		9FA204A11F5DB27C000B5C78 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				9FA204871F571284000B5C78 /* Models */,
 				9FA204721F5679A4000B5C78 /* AppDelegate.swift */,
 				9FA2049F1F5B7D0A000B5C78 /* FlickrNetworking.swift */,
+				9FA204A11F5DB27C000B5C78 /* PhotoCell.swift */,
 			);
 			path = VirtualTourist;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				9FA204991F57171A000B5C78 /* Pin+CoreDataClass.swift in Sources */,
 				9FA204981F57171A000B5C78 /* Photo+CoreDataProperties.swift in Sources */,
 				9FA204861F570AC2000B5C78 /* Model.xcdatamodeld in Sources */,
+				9FA204A21F5DB27C000B5C78 /* PhotoCell.swift in Sources */,
 				9FA2049C1F571CE6000B5C78 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

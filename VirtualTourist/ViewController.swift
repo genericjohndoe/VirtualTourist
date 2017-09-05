@@ -70,7 +70,7 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
         if segue.identifier == "LocationToPhotos" {
             print("prepare called")
             let destination = segue.destination as! PhotosViewController
-            destination.coordinates = sender as! CLLocationCoordinate2D
+            //destination.coordinates = sender as! CLLocationCoordinate2D
             destination.pin = selectedPin!
         }
     }

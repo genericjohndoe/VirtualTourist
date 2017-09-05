@@ -12,54 +12,70 @@ import UIKit
 class FlickrNetworking{
     static let sharedInstance = FlickrNetworking()
     private let flickrEndpoint  = "https://api.flickr.com/services/rest/"
-    private let flickrAPIKey    = "535a419ca6d5279703d6202365341df6 "
+    private let flickrAPIKey    = "535a419ca6d5279703d6202365341df6"
     private let flickrSearch    = "flickr.photos.search"
     private let format          = "json"
     private let searchRangeKM = 20
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     
-    func retrievePhotoData(latitude: Double, longitude: Double, completion: @escaping (_ success: Bool, _ error: String, _ photos:[Photo]?) -> Void) {
-        let request = NSMutableURLRequest(url: URL(string: "\(flickrEndpoint)?method=\(flickrSearch)&format=\(format)&api_key=\(flickrAPIKey)&lat=\(latitude)&lon=\(longitude)&radius=\(searchRangeKM)")!)
-        print("\(flickrEndpoint)?method=\(flickrSearch)&format=\(format)&api_key=\(flickrAPIKey)&lat=\(latitude)&lon=\(longitude)&radius=\(searchRangeKM)")
+    func retrievePhotoData(pin: Pin, completion: @escaping (_ success: Bool, _ error: String) -> Void) {
+        
+        let photoUrlString = "\(flickrEndpoint)?method=\(flickrSearch)&format=\(format)&api_key=\(flickrAPIKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=\(searchRangeKM)&per_page=25"
+        
+        let request = NSMutableURLRequest(url: URL(string: photoUrlString)!)
+        
         let session = URLSession.shared
-        _ = session.dataTask(with: request as URLRequest) { data, response, error in
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
             guard error == nil else {
-                completion(false, "error", nil)
+                completion(false, "error")
+                print("error")
                 return
             }
             
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                completion(false, "Your request returned a status code other than 2xx", nil)
+                completion(false, "Your request returned a status code other than 2xx")
+                print("Your request returned a status code other than 2xx")
                 return
             }
             
             guard let data = data else {
-                completion(false, "No data was returned by the request", nil)
+                completion(false, "No data was returned by the request")
+                print("No data was returned by the request")
                 return
             }
             
-            var parsedResult: [String:Any]
+            let range = Range(uncheckedBounds: (14, data.count - 1))
+            let newData = data.subdata(in: range)
+            var parsedResult: [String: Any]!
             do {
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                print("data description \(data.description)")
+                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String: Any]
+                print("parsed result \(parsedResult)")
                 let photoJson = parsedResult["photos"] as? [String:Any]
                 let photoData = photoJson?["photo"] as? [[String:Any]]
-                var index = 1
-                for photo in photoData! {
-                    let urlstring = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg"
-                    let url = URL(string: urlstring)
-                    //let data = try Data(contentsOf: url!)
-                    Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
-                    index = index + 1
-                }
-
+                print(photoData!)
+//                print("photo count \(photoData!.count)")
+//                var index = 1
+//                for photo in photoData! {
+//                    let urlstring = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg"
+//                    let url = URL(string: urlstring)
+//                    let newPhoto =  Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
+//                    newPhoto.pin = pin
+//                    pin.addToPhoto(newPhoto)
+//                    index = index + 1
+//                }
+                completion(true,"no error")
+                return
             } catch {
-                completion(false, "Could not parse the data as JSON", nil)
+                completion(false, "Could not parse the data as JSON")
+                print("Could not parse the data as JSON")
                 return
             }
-            return
         }
+        task.resume()
+        return
         
     }
 }

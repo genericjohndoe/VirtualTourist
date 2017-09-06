@@ -51,6 +51,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //last item
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         delegate.stack.context.delete(photo)
         collectionView.reloadData()
@@ -64,8 +65,9 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         getPhotos()
     }
     
+    var pages = 1
     func getPhotos(){
-        FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin) {
+        FlickrNetworking.sharedInstance.retrievePhotoData(pin: pin, page: pages) {
             (sucess, error) in
             if sucess {
                 print("networking request successful")
@@ -75,5 +77,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
                 }
             }
         }
+        pages = pages + 1
     }
 }

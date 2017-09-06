@@ -19,9 +19,11 @@ class FlickrNetworking{
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     
-    func retrievePhotoData(pin: Pin, completion: @escaping (_ success: Bool, _ error: String) -> Void) {
+    func retrievePhotoData(pin: Pin, page: Int, completion: @escaping (_ success: Bool, _ error: String) -> Void) {
         
-        let photoUrlString = "\(flickrEndpoint)?method=\(flickrSearch)&format=\(format)&api_key=\(flickrAPIKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=\(searchRangeKM)&per_page=25"
+        let photoUrlString = "\(flickrEndpoint)?method=\(flickrSearch)&format=\(format)&api_key=\(flickrAPIKey)&lat=\(pin.latitude)&lon=\(pin.longitude)&radius=\(searchRangeKM)&per_page=25&page=\(page)"
+        
+        print(photoUrlString)
         
         let request = NSMutableURLRequest(url: URL(string: photoUrlString)!)
         

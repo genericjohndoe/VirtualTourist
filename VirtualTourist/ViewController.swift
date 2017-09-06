@@ -42,14 +42,15 @@ class ViewController: UIViewController, MKMapViewDelegate, NSFetchedResultsContr
 
     @IBAction func addPin(){
         if gestureRecognizer.state == UIGestureRecognizerState.began {
-        print("addPin called")
-        let touchPoint = gestureRecognizer.location(in: map)
-        let newCoordinates = map.convert(touchPoint, toCoordinateFrom: map)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = newCoordinates
-        map.addAnnotation(annotation)
-        Pin(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude, context: delegate.stack.context)
-        delegate.stack.save()
+            print("addPin called")
+            let touchPoint = gestureRecognizer.location(in: map)
+            let newCoordinates = map.convert(touchPoint, toCoordinateFrom: map)
+            let newPin = Pin(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude, context: delegate.stack.context)
+            pins?.append(newPin)
+            delegate.stack.save() 
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = newCoordinates
+            map.addAnnotation(annotation)
         }
     }
     

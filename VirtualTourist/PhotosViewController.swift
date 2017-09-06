@@ -40,16 +40,24 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pin.photo = NSSet()
+        collectionView.reloadData()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print((pin.photo?.count)!)
         return (pin.photo?.count)!}
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print("cellforrowat called")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         cell.photo.image = UIImage(data: photo.image! as Data)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //remove from view, then core data
     }
     
     @IBAction func loadPhotos(_ sender: Any) {
@@ -65,7 +73,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
             (sucess, error) in
             if sucess {
                 print("networking request successful")
-                //print(self.pin.photo?.count)
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                     self.delegate.stack.save()

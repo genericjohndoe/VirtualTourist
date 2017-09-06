@@ -144,6 +144,7 @@ extension CoreDataStack {
                     } catch {
                         fatalError("Error while saving persisting context: \(error)")
                     }
+                    
                 }
             }
         }
@@ -153,7 +154,8 @@ extension CoreDataStack {
         
         if delayInSeconds > 0 {
             
-                self.save()
+            self.save()
+
                 print("Autosaving")
             
             let delayInNanoSeconds = UInt64(delayInSeconds) * NSEC_PER_SEC

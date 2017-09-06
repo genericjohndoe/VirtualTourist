@@ -40,12 +40,6 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        pin.photo = NSSet()
-        collectionView.reloadData()
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (pin.photo?.count)!}
     
@@ -57,7 +51,9 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //remove from view, then core data
+        let photo = pin.photo?.allObjects[indexPath.row] as! Photo
+        delegate.stack.context.delete(photo)
+        collectionView.reloadData()
     }
     
     @IBAction func loadPhotos(_ sender: Any) {

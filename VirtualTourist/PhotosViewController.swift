@@ -46,7 +46,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "locationPhotoCell", for: indexPath) as! PhotoCell
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
-        cell.photo.image = UIImage(data: photo.image! as Data)
+        cell.loadPhoto(photoObject: photo)
         return cell
     }
     
@@ -55,6 +55,7 @@ class PhotosViewController: UIViewController, MKMapViewDelegate, UICollectionVie
         let photo = pin.photo?.allObjects[indexPath.row] as! Photo
         delegate.stack.context.delete(photo)
         collectionView.reloadData()
+        delegate.stack.save()
     }
     
     @IBAction func loadPhotos(_ sender: Any) {

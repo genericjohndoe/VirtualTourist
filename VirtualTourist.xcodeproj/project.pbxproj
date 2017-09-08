@@ -369,6 +369,7 @@
 				9FA204831F5679A4000B5C78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

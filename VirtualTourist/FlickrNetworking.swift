@@ -61,8 +61,9 @@ class FlickrNetworking{
                 var index = 1
                 for photo in photoData! {
                     let urlstring = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!).jpg"
-                    let url = URL(string: urlstring)
-                    let newPhoto =  Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
+                    //let url = URL(string: urlstring)
+                    let newPhoto =  Photo(index: index, imageurl: urlstring, image: nil, context: self.delegate.stack.context)
+                    //let newPhoto =  Photo(index: index, imageurl: urlstring, image: try Data(contentsOf: url!) as NSData, context: self.delegate.stack.context)
                     newPhoto.pin = pin
                     pin.addToPhoto(newPhoto)
                     index = index + 1
@@ -77,6 +78,33 @@ class FlickrNetworking{
         }
         task.resume()
         return
-        
+    }
+    
+    func getPhotos(url: String,completion: @escaping (_ success: Bool, _ error: String, _ data: Data?) -> Void){
+        let request = NSMutableURLRequest(url: URL(string: url)!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            guard error == nil else {
+                completion(false, "error",nil)
+                print("error")
+                return
+            }
+            
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                completion(false, "Your request returned a status code other than 2xx",nil)
+                print("Your request returned a status code other than 2xx")
+                return
+            }
+            
+            guard let data = data else {
+                completion(false, "No data was returned by the request",nil)
+                print("No data was returned by the request")
+                return
+            }
+            completion(true, "", data)
+        }
+        task.resume()
+        return
     }
 }
